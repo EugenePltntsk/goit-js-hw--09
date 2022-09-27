@@ -1,2 +1,0 @@
-!function(){document.querySelector("#datetime-picker"),document.querySelector("button[data-start]");function t(t){return String(t).padStart(2,"0")}(function(){var e=Date.now();setInterval((function(){var n=function(e){var n=t(Math.floor(e%864e5/36e5)),r=t(Math.floor(e%36e5/6e4)),o=t(Math.floor(e%6e4/1e3));return{hours:n,mins:r,secs:o}}(Date.now()-e);n.hours,n.mins,n.secs}),1e3)})()}();
-//# sourceMappingURL=02-timer.3f134c7e.js.map
