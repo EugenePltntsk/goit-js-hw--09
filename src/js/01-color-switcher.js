@@ -7,7 +7,7 @@
   const bodyEl = document.body;
   const startButtonEl = document.querySelector('button[data-start]');
   const stopButtonEl = document.querySelector('button[data-stop]');
-  let timerColor;
+  let timerColor = null;
   
   startButtonEl.addEventListener("click", () => {
     startButtonEl.setAttribute("disabled", true)
