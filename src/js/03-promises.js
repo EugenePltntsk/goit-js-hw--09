@@ -1,4 +1,4 @@
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
@@ -26,13 +26,15 @@ formEl.addEventListener('submit', event => {
 
     createPromise(i, delay)
       .then(({ position, delay }) => {
-        Notiflix.Notify.success(
+        // Notiflix.Notify.success 
+        console.log(
           `✅ Fulfilled promise ${position} in ${delay}ms`
         );
 
       })
       .catch(({ position, delay }) => {
-        Notiflix.Notify.warning(
+        // Notiflix.Notify.warning
+        console.log(
           `❌ Rejected promise ${position} in ${delay}ms`
         );
       });
