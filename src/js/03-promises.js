@@ -26,15 +26,13 @@ formEl.addEventListener('submit', event => {
 
     createPromise(i, delay)
       .then(({ position, delay }) => {
-        // Notiflix.Notify.success 
-        console.log(
+        Notiflix.Notify.success(
           `✅ Fulfilled promise ${position} in ${delay}ms`
         );
 
       })
       .catch(({ position, delay }) => {
-        // Notiflix.Notify.warning
-        console.log(
+        Notiflix.Notify.warning(
           `❌ Rejected promise ${position} in ${delay}ms`
         );
       });
