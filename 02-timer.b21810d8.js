@@ -1,0 +1,2 @@
+document.querySelector("#datetime-picker"),document.querySelector("button[data-start]");function t(t){return String(t).padStart(2,"0")}({start(){const e=Date.now();setInterval((()=>{const o=Date.now()-e,{hours:r,mins:n,secs:s}=function(e){const o=t(Math.floor(e%864e5/36e5)),r=t(Math.floor(e%36e5/6e4)),n=t(Math.floor(e%6e4/1e3));return{hours:o,mins:r,secs:n}}(o)}),1e3)}}).start();
+//# sourceMappingURL=02-timer.b21810d8.js.map
