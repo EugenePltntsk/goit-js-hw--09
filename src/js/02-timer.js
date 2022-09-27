@@ -1,40 +1,74 @@
-// const date1 = Date.now();
-
-// setTimeout(() => {
-//     const date2 = Date.now();
-//     console.log(date1, date2)
-//     console.log(date2 - date1);
-// }, 3000);
+import Notiflix from 'notiflix';
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
 
 const refs = {
     inputEl: document.querySelector("#datetime-picker"),
     startBtn: document.querySelector('button[data-start]'),
+    inputTimeDatePicker: document.querySelector("#datetime-picker"),
+    spanDays: document.querySelector("[data-days]"),
+    spanHours: document.querySelector("[data-hours]"),
+    spanMinutes: document.querySelector("[data-minutes]"),
+    spanSeconds: document.querySelector("[data-seconds]"),
 
+}  
 
-}
-// console.log(refs.startBtn);
+let targetDate = null;
+   let intervalId = null;
 
+const options = {
+    enableTime: true,
+    time_24hr: true,
+    defaultDate: new Date(),
+    minuteIncrement: 1,
+    onClose(selectedDates) {
+        
+      targetDate = selectedDates[0];
+      if (options.defaultDate > targetDate) {
+        Notiflix.Notify.warning("Please choose a date in the future");
+        refs.startBtn.disabled = true;
+      } else {
+        refs.startBtn.disabled = false;
+
+      }
+      console.log(targetDate);
+    },
+  };
+
+ flatpickr("#datetime-picker", options);
 
 
 const timer = {
     start() {
-        const startTime = Date.now();
-        setInterval(() => {
+
+       
+        intervalId = setInterval(() => {
             const currentTime = Date.now();
-            const deltaTime = currentTime - startTime;
-            const { hours, mins, secs } = getTimeComponents(deltaTime);
-            // console.log("start -> currentTime", currentTime);
-            // console.log(timeComponents);
-
-            // console.log(`${hours}:${mins}:${secs}`)
-
-            // console.log(`${pad(new Date(deltaTime).getUTCHours())}:${pad(new Date(deltaTime).getMinutes())}:${pad(new Date(deltaTime).getSeconds())}`)
             
+            const deltaTime = targetDate - currentTime;
+            const { days, hours, mins, secs } = getTimeComponents(deltaTime);
+            if (deltaTime <= 0) {
+                clearInterval(intervalId);
+            } else {
+                // console.log(`${days}:${hours}:${mins}:${secs}`)
+                refs.spanDays.textContent = days;
+                refs.spanHours.textContent = hours;
+                refs.spanMinutes.textContent = mins;
+                refs.spanSeconds.textContent = secs;
+            } 
+                        
         }, 1000);
     },
 };
 
-timer.start();
+
+
+refs.startBtn.addEventListener("click", event => {
+    timer.start()
+    refs.inputEl.disabled = true;
+    event.target.disabled = true;
+
+})
 
 function pad(value) {
     return String(value).padStart(2, "0");
@@ -42,6 +76,9 @@ function pad(value) {
 
 
 function getTimeComponents(time) {
+    const days = pad(
+        Math.floor((time / (1000 * 60 * 60 * 24))));
+    
     const hours = pad(
         Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
     
@@ -49,6 +86,6 @@ function getTimeComponents(time) {
         Math.floor((time % (1000 * 60 * 60)) / (1000 * 60)));
     const secs = pad(
         Math.floor((time % (1000 * 60)) / 1000));
-        return { hours, mins, secs };
+        return { days, hours, mins, secs };
     
 }

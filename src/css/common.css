@@ -16,3 +16,25 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.package {
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+  align-items: center;
+
+}
+
+.timer {
+  display: flex;
+  gap: 30px;
+}
+
+.field {
+
+  display: flex;
+  flex-direction: column;
+ /* justify-content: center; */
+ text-align: center;
+ gap: 15px;
+}
