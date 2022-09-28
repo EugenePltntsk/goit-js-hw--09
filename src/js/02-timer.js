@@ -31,7 +31,7 @@ const options = {
         refs.startBtn.disabled = false;
 
       }
-      console.log(targetDate);
+     
     },
   };
 
